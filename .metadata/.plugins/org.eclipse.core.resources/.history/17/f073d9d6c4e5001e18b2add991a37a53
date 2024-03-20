@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>클래스 조작 메소드</title>
+    <script th:src="@{/script/jquery-3.7.1.min.js}"></script>
+    <style>
+        img {
+            background: #555;
+        }
+
+        img.type1 {
+            background: rgba(186, 204, 79);
+        }
+
+        img.type2 {
+            background: #a13d93;
+        }
+
+        img.type3 {
+            background: #6acadd;
+        }
+
+        img.type4 {
+            background: #dc7b7b;
+        }
+
+        img.type5 {
+            background: #9beb9f;
+        }
+    </style>
+    <script>
+        $(function () {
+
+
+        });
+    </script>
+</head>
+
+<body>
+
+    <h2>클래스(스타일) 조작 메소드(removeClass(),addClass())</h2>
+    <div>
+        <img th:src="@{/images/dog1.png}" alt="">
+        <img th:src="@{/images/dog2.png}" alt="">
+        <img th:src="@{/images/dog3.png}" alt="">
+        <img th:src="@{/images/dog4.png}" alt="">
+        <img th:src="@{/images/dog5.png}" alt="">
+
+    </div>
+
+
+</body>
+
+</html>

@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script th:src="@{/script/jquery-3.7.1.min.js}"></script>
+    <script>	ready 와 
+        $(function () {
+            $("#checkAll").on("click", function () {
+                if ($(this).is(":checked")) {
+                    $("#memberTable input:checkbox").prop("checked", true);
+                }
+                else $("#memberTable input:checkbox").prop("checked", false);
+
+            })
+            //
+            $("#deleteMember").on("click", function () {
+
+                let data = $("#memberTable input:checkbox:checked").parent().parent();
+                console.log(data)
+                data.remove();
+            })
+
+        });
+    </script>
+</head>
+
+<body>
+    <div id="container"></div>
+
+    <h2 id="title">[ 고객목록 ]</h2>
+    <div>
+        <form action="" method="POST">
+            <select name="searchType" id="">
+                <option value="name">이름</option>
+                <option value="grade">고객 등급</option>
+
+            </select>
+            <input type="text" name="searchText">
+            <input type="button" value="검색">
+
+        </form>
+    </div><br>
+    <div id="action">
+        <input type="checkbox" id="checkAll">
+        <input type="button" id="deleteMember" value="삭제"> <!--this 위의를 싿다 날려야-->
+    </div>
+    <table id="memberTable">
+        <tr>
+            <th>선택</th>
+            <th>이름(이메일)</th>
+            <th>주소</th>
+            <th>전화번호</th>
+            <th>고객등급</th>
+        </tr>
+        <tr>
+            <td><input type="checkbox"></td>
+            <td>강감찬(naver.com)</td>
+            <td>서울시 시청앞</td>
+            <td>010-7777-1111</td>
+            <td>최우수 등급</td>
+        </tr>
+        <tr>
+            <td><input type="checkbox"></td>
+            <td>권율(nate.com)</td>
+            <td>서울시 청계산</td>
+            <td>010-1111-1111</td>
+            <td>라일락 등급</td>
+        </tr>
+        <tr>
+            <td><input type="checkbox"></td>
+            <td>아이유(google.com)</td>
+            <td>경상북도 경주시</td>
+            <td>010-2222-1111</td>
+            <td>다이아 등급</td>
+        </tr>
+        <tr>
+            <td><input type="checkbox"></td>
+            <td>짬봉빱씨(google.com)</td>
+            <td>코엑스 짬뽕타운</td>
+            <td>010-6666-6666</td>
+            <td>일반 등급</td>
+        </tr>
+        <tr>
+            <td><input type="checkbox"></td>
+            <td>원소주(number.com)</td>
+            <td>전남</td>
+            <td>010-8888-8888</td>
+            <td>우수 등급</td>
+        </tr>
+
+    </table>
+
+
+</body>
+
+</html>

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<meta charset="UTF-8">
+		<title>Insert title here</title>
+		<script th:src="@{/script/jquery-3.7.1.min.js}"></script>
+		<script>
+		// 문서가 준비되면 function()을 실행 
+			/* jQuery('document').ready(function(){
+				alert("aaaa");
+			}); // document body가 모두 준비되면 이걸 실행하세요! , 오류나 경고창이 안나옴 ~
+			
+			$('document').ready(function(){
+				alert("aaaa");
+			}); */
+			 $(function(){
+				let tag = $("h2") // h2관련된 태그에 접근을 한다 
+				tag.css("color","red","background-color","yellow")
+			}); 
+			
+			
+		</script>
+	</head>
+<body>
+	<h2>동작하나용? </h2>
+
+</body>

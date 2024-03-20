@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename resource &apos;jquery2/src/main/resources/templates/selector.html&apos; to &apos;traversing.html&apos;" description="Rename resource &apos;selector.html&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="src/main/resources/templates/selector.html" name="traversing.html" stamp="1710898544742" updateReferences="true"/>
+</session>

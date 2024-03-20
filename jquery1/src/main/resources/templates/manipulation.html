@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DOM 조작 메소드</title>
+
+    <script th:src="@{/script/jquery-3.7.1.min.js}"></script>
+    <script>
+        $(function () {
+            $("#btn1").on('click', function () {
+                let mytext = $("p#mytext").text(); // 값을 읽어서 변수에 대입 
+                $("#target").text(mytext); // 읽어온 데이터를 집어 넣는다. 
+
+            })
+
+            $("#btn2").on('click', function () {
+                let text = "무궁화 <b style:color=red;>꽃</b>이 피었습니다."
+                $("#target").html(text); // 읽어온 데이터를 해석해서 넣는다 
+
+            })
+            $("#btn3").on('click', function () {
+                let img = $("img").attr("src");
+                alert(img);
+                // attr은 전달인자 2개면 set을 한다! 바꿔치기 
+                $("img").attr("src", "/images/smile3.png")
+
+            })
+            $("#read").on('click', function () {
+                let temp1 = $("#temp1").val() // 값을 읽을때 
+                console.log("sdfsdfsdf");
+                console.log(temp1);
+                $("#target").html(temp1)
+            })
+            $("#write").on('click', function () {
+                let temp2 = $("#target").html() // 값을 읽을때 
+                console.log(temp2);
+                $("#temp2").val(temp2)
+            })
+
+            $("#append").on('click', function () {
+                let data = "<div>반갑습니다.</div>";
+                $("#result").append(data);// #result의 마지막 자식요소로 삽입
+            })
+            $("#prepend").on('click', function () {
+                let data = "<div>잘지내셨나용!.</div>";
+
+                $("#result").prepend(data); // #result의 첫째 자식 요소로 삽입
+            })
+
+        });
+    </script>
+</head>
+
+<body>
+    <a th:href="@{/}">첫페이지</a>
+    <h2>DOM 조작 메소드(html(), text(), attr())</h2>
+    <p>
+        <input type="button" id="btn1" value="글씨복사">
+        <input type="button" id="btn2" value="태그삽입">
+        <input type="button" id="btn3" value="바꿔치기">
+
+
+    </p>
+    <p id="mytext">무궁화 꽃이 피었습니다.</p>
+    <p id="target"></p>
+    <p><img th:src="@{/images/smile2.png}" alt=""></p>
+
+    <hr>
+    <h2>form 조작 메소드(val(): 폼에서 데이터를 꺼내거나 넣을때)</h2>
+    <div>
+        <input type="button" id="read" value="read">
+        <input type="button" id="write" value="write">
+        <input type="text" id="temp1">
+        <input type="text" id="temp2">
+
+    </div>
+    <hr>
+    <h2>DOM 조작 메소드(append(),prepend())</h2>
+    <div>
+        <input type="button" id="append" value="Append">
+        <input type="button" id="prepend" value="Prepend">
+
+        <p id="result">
+            <span>안녕하세요???</span>
+        </p>
+    </div>
+
+
+</body>
+
+</html>

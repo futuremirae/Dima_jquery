@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="UTF-8">
+	<title>Insert title here</title>
+	<script th:src="@{/script/jquery-3.7.1.min.js}"></script>
+	<script>
+		// 문서가 준비되면 function()을 실행 
+		/* jQuery('document').ready(function(){
+			alert("aaaa");
+		}); // document body가 모두 준비되면 이걸 실행하세요! , 오류나 경고창이 안나옴 ~
+		
+		$('document').ready(function(){
+			alert("aaaa");
+		}); */
+		/*  $(function(){
+			let tag = $("h2") // h2관련된 태그에 접근을 한다 
+			//tag.css("color","red","backgrounColor","yellow") //속성명-값 한 쌍임 
+			tag.css({"color":"red","background-color":"yellow"}); //속성명-값 한 쌍임 
+		});  */
+		$(function () {
+			let result = $("h2").css({ "color": "red", "background-color": "yellow" }); //속성명-값 한 쌍임 
+			console.log(result);
+		});
+
+
+	</script>
+</head>
+
+<body>
+	<h2>jQuery 연습</h2>
+	<ul>
+		<li><a th:href="@{/selector}">1.선택자 연습</a></li>
+		<li><a th:href="@{/filter}">2.필터 선택자 연습</a></li>
+		<li><a th:href="@{/filter_method}">3.필터 메소드 연습</a></li>
+
+		<li><a th:href="@{/manipulation}">4.DOM 조작 메소드 </a></li>
+		<li><a th:href="@{/classTest}">5.DOM 조작 메소드 </a></li>
+		<li><a th:href="@{/exam1}">6.연습문제1 </a></li>
+		
+
+
+	</ul>
+
+</body>

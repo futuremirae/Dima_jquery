@@ -1,0 +1,2 @@
+spring.application.name=AjexTest
+server.port=8083

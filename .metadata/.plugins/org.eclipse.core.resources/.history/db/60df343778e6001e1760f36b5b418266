@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script th:src="@{/script/jquery-3.7.1.min.js}"></script>
+    <style>
+        thead {
+            background-color: aquamarine;
+        }
+    </style>
+    <script>
+        $(function () {
+            $("#checkAll").on("click", function () {
+                if ($(this).is(":checked")) {
+                    $("#memberTable input:checkbox").prop("checked", true);
+                    // input[type]='checked'
+                }
+                else $("#memberTable input:checkbox").prop("checked", false);
+
+            })
+            //
+            $("#deleteMember").on("click", function () {
+
+                let data = $("#memberTable input:checkbox:checked").parent().parent();// 제이쿼리객체 
+                console.log(data)
+                data.remove();
+            })
+            //
+
+            $("#addcustomer").on("click", function () {
+                let name = $("#name").val();
+                let phone = $("#phone").val();
+                let address = $("#address").val();
+
+
+                let grade = $(".grade :selected").val();
+
+                console.log(grade);
+
+
+                // 정보 추가하기 
+
+                let result = `<tr><td><input type="checkbox"></td><td>${name}</td><td>${phone}</td><td>${address}</td><td>${grade}</td></tr >`
+                console.log(result);
+
+                $("table").append(result);
+
+
+
+
+
+            })//끝
+            //초기화 하기 
+            $("#removeall").on("click", function () {
+                let input = $("#customerInfo input[type='text']")
+                console.log(input.length);
+                for(let i = 0; i< input.length;i++){
+                	input[i].val()="";
+                	
+                }
+
+            });
+
+
+        });
+    </script>
+</head>
+
+<body>
+    <div id="container"></div>
+    <h2 id="title">[ 고객목록 ]</h2>
+    <div id="customerInfo">
+        <input type="text" id="name" value="" placeholder="이름 입력">
+        <input type="text" id="phone" value="" placeholder="주소 입력">
+        <input type="text" id="address" value="" placeholder="번호 입력">
+
+        <select id="" class="grade">
+            <option value="최우수" class="grade">최우수</option>
+            <option value="우수" class="grade">우수</option>
+            <option value="보통" class="grade">일반</option>
+        </select>
+        <input type="button" id="addcustomer" value="추가">
+        <input type="button" id="removeall" value="초기화">
+
+    </div>
+    <br><br>
+
+    <div>
+        <form action="" method="POST">
+            <select name="searchType" id="">
+                <option value="name">이름</option>
+                <option value="grade">고객 등급</option>
+            </select>
+            <input type="text" name="searchText">
+            <input type="button" value="검색">
+
+        </form>
+    </div><br>
+    <div id="action">
+        <input type="checkbox" id="checkAll">
+        <input type="button" id="deleteMember" value="삭제"> <!--this 위의를 싿다 날려야-->
+    </div>
+    <table id="memberTable" border="1">
+        <thead>
+            <tr>
+                <th>선택</th>
+                <th>이름(이메일)</th>
+                <th>주소</th>
+                <th>전화번호</th>
+                <th>고객등급</th>
+            </tr>
+
+        </thead>
+        <tr>
+            <td><input type="checkbox"></td>
+            <td>강감찬(naver.com)</td>
+            <td>서울시 시청앞</td>
+            <td>010-7777-1111</td>
+            <td>최우수 등급</td>
+        </tr>
+
+
+    </table>
+
+
+</body>
+
+</html>

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        .myclass {
+            width: 200px;
+            height: 40px;
+            float: left;
+            padding: 20px;
+            margin: 20px;
+            background-color: #eee;
+        }
+
+        #test {
+            clear: both;
+            /* float: left;따르지 않겠다 */
+        }
+    </style>
+    <script th:src="@{/script/jquery-3.7.1.min.js}"></script>
+    <script>
+        $(function () {
+            let element = $("#test").find("*").css("border", "3px solid red").length //먼저 #test 찾고 그안의 모든 애들을 선택 
+            console.log(element);
+            $("body").prepend("<h2>" + element + "개의 요소가 선택됨</h2>"); // 바디의 첫번째 자식으로 h2를 삽입 
+            //
+            $(".myclass.yourclass").css("border", "3px solid red"); // 두개 다 가지고 있는 것만 
+            /*   $(".myclass, yourclass").css("bolder", "3px solid red"); 모두 선택*/
+
+            //
+            $("#wrap a[href]").css({ "color": "#f00" });
+            //
+            $("#wrap a[href$=net]").css({ "background-color": "#ff0" });
+            //
+            $("#member :text").css({ "background-color": "#f0f" });
+            $("#member :password").css({ "background-color": "#0ff" });
+
+
+        });
+
+    </script>
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="test">
+        <div>DIV 태그</div>
+        <span>SPAN 태그</span>
+        <p>P태그 <button>Button 태그</button></p>
+    </div>
+    <hr>
+    <h2>클래스 선택자</h2>
+    <div class="myclass">DIV.myclass</div>
+    <div class="myclass yourclass">DIV.myclass.yourclass</div>
+    <span class="myclass yourclass">SPAN.myclass.yourclass</span>
+    <br>
+
+    <hr id="test">
+    <h2>속성 선택자-1</h2>
+    <div id="wrap">
+        <p><a href="http://google.co.kr">구글</a></p>
+        <p><a href="http://naver.com">네이버</a></p>
+        <p><a href="http://daum.net">다음</a></p>
+
+
+    </div>
+    <h2>속성 선택자-2</h2>
+    <form id="member">
+        <p>아이디: <input type="text" id="userid"></p>
+        <p>비빌번호: <input type="password" id="userid"></p>
+
+    </form>
+
+</body>
+
+</html>

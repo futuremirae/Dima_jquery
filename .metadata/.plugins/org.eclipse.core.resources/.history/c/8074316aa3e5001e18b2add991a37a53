@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>필터선택자</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+
+    </style>
+    <script th:src="@{/script/jquery-3.7.1.min.js}"></script>
+    <script>
+        $(function () {
+            $("tr:first").css("background-color", "gray"); //인덱스는 0번부터 시작이라는 것 
+            $("tr:odd").css("background-color", "pink"); //인덱스는 0번부터 시작이라는 것 
+            $("td:nth-child(3n+1)").css("color", "blue");
+            $("td:nth-child(3n+2)").css("font-style", "italic");
+        });
+
+
+    </script>
+</head>
+
+<body>
+    <h2>필터 선택자</h2>
+    <table border="1">
+        <tr>
+            <th>이름</th>
+            <th>전화번호</th>
+            <th>주소</th>
+            <th>취미</th>
+
+        </tr>
+        <tr>
+            <td>김다미</td>
+            <td>010</td>
+            <td>서울</td>
+            <td>운동</td>
+        </tr>
+        <tr>
+            <td>김레미</td>
+            <td>011</td>
+            <td>강원도</td>
+            <td>운동</td>
+        </tr>
+        <tr>
+            <td>최우식</td>
+            <td>019</td>
+            <td>강릉</td>
+            <td>운동</td>
+        </tr>
+
+
+    </table>
+
+
+</body>
+
+</html>

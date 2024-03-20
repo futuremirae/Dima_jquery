@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>트래버싱</title>
+    <script th:src="@{/script/jquery-3.7.1.min.js}"></script>
+    <script>
+        $(function () {
+            $("div").find("b").css({ "font-size": "1.5em", "color": "red" })
+            // $("div").childrenAll().css({ "font-size": "1.5em", "color": "green" })
+            $("div").children("#item").html("<i>나는 자식이에요</i>")
+            $("div").children("#item").append("<i>나는 자식이에요</i>")
+            $("div").children("#item").text("<i>나는 자식이에요</i>")
+            $("b").parent().css("background-color", "silver")
+            $("p").eq(3).prevAll().css("background-color", "gold")
+            // div 기준으로 li 태그 찾기 
+            $("div").prev().find("li:odd").css("color", "blue")
+            $("div").prev().children().odd().css("color", "blue")
+            $("div").prev().find("li:nth-child(2n+1)").css("color", "pink");
+
+            //5개 반환하고 다시 3개 선택 
+            //end() : 메소드 체이닝을통해 범위가 좁아진상태를 이전 상태로 되돌림 
+            $("h3").css("color", "orange").filter(":even").css("color","red")
+            .end().filter(":odd").css("background-color", "yellow").
+            
+
+
+        });
+
+    </script>
+</head>
+
+<body>
+    <h2>탐색 주요 메소드</h2>
+    <ul>
+        <li>find("선택자"): 선택한 요소의 자손 요소 중에서 특정 조건에 부합하는 요소를 찾음</li>
+        <li>children("선택자") : 선택힌 요소의 자손 요소를 탐색</li>
+        <li>parent() / parents("선택자") 선택한 요소의 부모요소를 탐색</li>
+        <li>next("선택자"): 선택한 요소의 형제요소</li>
+    </ul>
+    <div>
+        <p>첫번째요소: <b>하나</b></p>
+        <p id="item">둘</p>
+        <p>셋</p>
+        <p>넷</p>
+        <p>다섯</p>
+    </div>
+    <hr>
+    
+    <h2>메소드 체이닝</h2>
+    <h3>heder-0</h3>
+    <h3>heder-1</h3>
+    <h3>heder-2</h3>
+    <h3>heder-3</h3>
+    <h3>heder-4</h3>
+
+
+
+</body>
+
+</html>
