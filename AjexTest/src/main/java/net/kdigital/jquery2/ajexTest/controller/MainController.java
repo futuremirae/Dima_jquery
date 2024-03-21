@@ -10,5 +10,9 @@ public class MainController {
 	public String index() {
 		return "index"; 
 	}
+	@GetMapping("/customer")
+	public String customer() {
+		return "customer"; 
+	}
 
 }

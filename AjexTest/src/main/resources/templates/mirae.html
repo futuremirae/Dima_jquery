@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ajax 데이터 송수신</title>
+    <script th:src="@{/script/jquery-3.7.1.min.js}"></script>
+    <script>
+        $(function () {
+            $("#reqBtn1").on("click", ajax_req1);
+            $("#reqBtn2").on("click", ajax_req2);
+            $("#reqBtn3").on("click", ajax_req3);
+            $("#reqBtn4").on("click", ajax_req4);
+
+        });
+        function ajax_req1() {
+            $.ajax({
+                url: 'ajaxReq1',
+                method: 'get',
+                success: function (resp){
+                	alert(resp)
+                }
+            })
+
+        }
+        function ajax_req2() {
+        	let name = $("#username").val()
+        	let email = $("#email").val()
+        	let senddata = {'username': name, 'email':email}
+            $.ajax({
+                url: 'ajaxReq2',
+                method: 'post',
+                data: senddata,
+                success: function (resp){
+                	$("#result").html("<p style='color:red;'>"+resp+"</p>")
+                }
+            })
+
+        }
+        
+        function ajax_req3() {
+        	let username = $("#username").val();
+        	let email = $("#email").val();
+        	let senddata = {"username":username,"email":email}
+            $.ajax({
+                url: 'ajaxReq3',
+                method: 'post',
+                data: senddata,
+                success: function (resp){
+                	let data = `이름: ${resp["username"]} <br>이메일: ${resp["email"]}`;
+                	$("#result").html("<span style='background-color:yellow'>"+data+"</span>");
+                	
+                }
+            })
+
+        }
+        function ajax_req4() {
+            $.ajax({
+                url: "ajaxReq4",
+                method: "GET",
+                success: output
+            })
+        }
+        function output(resp){
+        	let data = ""; 
+        	$.each(resp,function(index,item){
+        		let username = item["username"];
+        		let email = item["email"];
+        		
+        		
+        		data += `#${index+1}번 이름: ${item["username"]} / 이메일 : ${item["email"]}<br>`
+        		
+        	})
+        	$("#result").html(data);
+        }
+
+       
+       
+
+
+
+
+
+    </script>
+
+</head>
+
+<body>
+
+    <div class="container">
+        <h2>[ Ajax 요청 ]</h2>
+        <p>1. Ajax로 요청 보내기(서버 콘솔창에서 확인)</p>
+        <input type="button" id="reqBtn1" value="요청보내기">
+        <br>
+
+        <p>2. 데이터 보내기</p>
+        <input type="text" id="username" placeholder="이름 입력">
+        <input type="text" id="email" placeholder="이메일 입력">
+        <input type="button" id="reqBtn2" value="데이터전송">
+        <input type="button" id="reqBtn3" value="데이터송수신">
+        <br>
+
+        <p>3. 다량의 데이터 수신</p>
+        <input type="button" id="reqBtn4" value="데이터 수신">
+
+        <h3 id="result"></h3>
+
+    </div>
+
+</body>
+
+</html>

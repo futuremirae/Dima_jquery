@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ajax 데이터 송수신</title>
+    <script th:src="@{/script/jquery-3.7.1.min.js}"></script>
+    <script>
+        $(function () {
+            //$("#add").click()
+            $("#add").on('click', add);
+            init();
+
+        });
+        // 등록된 모든 데이터를 db로부터 가져와서 출력 
+        function init() {
+            $.ajax({
+                url: "selectAll"
+                , method: "get"
+                , success: output
+
+            })
+
+
+        }
+        // 모든 정보를 출력하는 함수 [{},{},{}] 여러개의 jason이 리스트 형태로 올것 
+        function output(resp) {
+            let receivedData = '';
+            $.each(resp, function (index, item) {
+                receivedData += `
+                        <div>
+                            번호 : ${item["customerNum"]} / 
+                            이름: ${item["username"]}
+                            이메일: ${item["email"]}
+                            <input type="button" class="delBtn" value="삭제" data-no="${item['customerNum']}">
+                        </div>
+                
+                    `;// 동적으로 생긴 버튼에 이벤트를 걸꺼면 함수를 벗어나서 이벤트를 걸면 찾지를 못한다 
+                // 위에 코드는 돔상에 존재하는게 아니다. 따라서 화면에 생기고 나서 이벤트를 ㄹ걸어줘야함 순서 중요 
+
+
+            });
+            $("#result").html(receivedData);
+            $(".delBtn").on('click', deletecustomer);// 이벤트 설정 위치 주의 
+
+
+
+
+
+
+        }
+        // 고객 정보 삭제
+        function deletecustomer() {
+            alert("delete");
+
+            let data = $(this) // 삭제버튼 태그를 저장한다!
+            if (!(confirm("삭제를 하시겠습니까?"))) return;
+            $.ajax({
+                url: "delete"
+                , method: 'get'
+                , data: { "customerNum": data.attr("data-no") }
+                , success: function (resp) {// 삭제가 되었으면 true가 반환된다 
+                    console.log("호호 아줌마 ")
+                    console.log(typeof resp)
+                    if (resp) {
+                        //$(this)// 못쓴다 function이 this가 되는 것 이므로! 위에서 data 변수에 버튼을 저장해 온다 
+                        data.parent().remove();
+                        alert("삭제완료!!!!!!");
+                    } else {
+                        alert("삭제 실패!");
+                    }
+
+
+                }
+            })
+
+        }
+
+
+        // 고객 정보 입력 
+        function add() {
+            let username = $("#username").val();
+            let email = $("#email").val();
+
+            let sendData = { "username": username, "email": email }; //정보를 전달할 제이슨 객체 
+            $.ajax({
+                url: "insert",
+                method: "post",
+                data: sendData,
+                success: function (resp) {// 시퀀스 객체, 이름, 이메일이 jason으로 넘어옴 
+                    let receivedData = `
+                        <div>
+                            번호 : ${resp["customerNum"]} 
+                            이름: ${resp["username"]}
+                            이메일: ${resp["email"]}
+                            <input type="button" class="delBtn" value="삭제" data-no="${resp['customerNum']}">
+                        </div>
+                
+                    `;
+                    $("#result").prepend(receivedData);
+                    //${} 타임리프토 아닌 자바스크립트에서 제공하는 리터럴 처럼 쓸수 있는거
+                    $(".delBtn").on("click", deletecustomer);
+
+                }
+            })
+        }
+
+
+
+    </script>
+
+</head>
+
+<body>
+    <a th:href="@{/}">처음으로 돌아가기</a>
+
+    <div class="container">
+
+        <h2>고객관리</h2>
+        <form action="">
+            <input type="text" id="username" placeholder="이름 입력">
+            <input type="text" id="email" placeholder="이메일 입력">
+            <input type="button" id="add" value="정보추가">
+            <input type="reset" id="reset" value="초기화">
+            <br>
+        </form>
+
+
+        <div id="result"></div>
+
+    </div>
+
+</body>
+
+</html>
